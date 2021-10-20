@@ -14,10 +14,10 @@ export default [
       { file: pkg.module, format: "es", name: "bundle" },
     ],
     plugins: [
-        resolve(), 
-        babel(), 
+        resolve(),
+        babel(),
         commonjs(),
-        json(), 
+        json(),
         terser()
     ],
   },
@@ -35,10 +35,10 @@ export default [
       },
     ],
     plugins: [
+      json(),
       resolve({ mainFields: ["module", "main", "browser"] }),
       babel(),
       commonjs(),
-      json(),
       terser(),
     ]
   }
