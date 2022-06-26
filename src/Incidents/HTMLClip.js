@@ -1,4 +1,4 @@
-import MotorCortex from "@donkeyclip/motorcortex";
+import { HTMLClip } from "@donkeyclip/motorcortex";
 
 /**
  * The purpose of extending the HTMLClip is to full, parametric
@@ -11,7 +11,7 @@ import MotorCortex from "@donkeyclip/motorcortex";
  * The buildTree method allows developers to define Incidents (of any plugin)
  * dynamically and position them on the Clip.
  */
-export default class MyHTMLClip extends MotorCortex.HTMLClip {
+export default class MyHTMLClip extends HTMLClip {
   get html() {
     return "<div></div>";
   }

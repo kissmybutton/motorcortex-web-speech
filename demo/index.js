@@ -1,9 +1,9 @@
-import MotorCortex from "@donkeyclip/motorcortex";
+import { loadPlugin, HTMLClip } from "@donkeyclip/motorcortex";
 import Player from "@donkeyclip/motorcortex-player";
 import MyPluginDefinition from "../dist/bundle.esm";
-const MyPlugin = MotorCortex.loadPlugin(MyPluginDefinition);
+const MyPlugin = loadPlugin(MyPluginDefinition);
 
-const clip = new MotorCortex.HTMLClip({
+const clip = new HTMLClip({
   html: `<div class="container">
         <div id="effect"></div>
         <div id="htmlclip"></div>

@@ -1,7 +1,5 @@
-import MotorCortex from '@donkeyclip/motorcortex';
+import { BrowserClip } from "@donkeyclip/motorcortex";
 
-export default class MyClip extends MotorCortex.BrowserClip{
-    onAfterRender(){
-        
-    }
+export default class MyClip extends BrowserClip {
+  onAfterRender() {}
 }
