@@ -42,10 +42,10 @@
     "@donkeyclip/motorcortex": "7.5.4"
   },
   "devDependencies": {
-    "@babel/cli": "7.21.5",
-    "@babel/core": "7.21.8",
-    "@babel/eslint-parser": "7.21.8",
-    "@babel/preset-env": "7.21.5",
+    "@babel/cli": "7.23.0",
+    "@babel/core": "7.23.0",
+    "@babel/eslint-parser": "7.22.15",
+    "@babel/preset-env": "7.22.20",
     "@donkeyclip/motorcortex": "9.6.0",
     "@donkeyclip/motorcortex-player": "2.10.11",
     "@rollup/plugin-babel": "5.3.1",
