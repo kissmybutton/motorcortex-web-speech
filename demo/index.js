@@ -1,6 +1,6 @@
-import { loadPlugin, HTMLClip } from "@donkeyclip/motorcortex";
+import { HTMLClip, loadPlugin } from "@donkeyclip/motorcortex";
 import Player from "@donkeyclip/motorcortex-player";
-import MyPluginDefinition from "../dist/bundle.esm";
+import MyPluginDefinition from "../dist/bundle.esm.js";
 const MyPlugin = loadPlugin(MyPluginDefinition);
 
 const clip = new HTMLClip({
@@ -36,7 +36,7 @@ const newEffect = new MyPlugin.MyEffect(
   {
     selector: "#effect",
     duration: 1000,
-  }
+  },
 );
 
 const newCombo = new MyPlugin.MyCombo(
@@ -45,7 +45,7 @@ const newCombo = new MyPlugin.MyCombo(
   },
   {
     selector: "#combo",
-  }
+  },
 );
 
 const newHTMLClip = new MyPlugin.MyHTMLClip(
@@ -54,7 +54,7 @@ const newHTMLClip = new MyPlugin.MyHTMLClip(
   },
   {
     selector: "#htmlclip",
-  }
+  },
 );
 
 const newCustomClip = new MyPlugin.Clip({
@@ -66,4 +66,4 @@ clip.addIncident(newCombo, 0);
 clip.addIncident(newHTMLClip, 0);
 clip.addIncident(newCustomClip, 0);
 
-const player = new Player({ clip });
+new Player({ clip });

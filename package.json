@@ -5,6 +5,7 @@
   "main": "dist/bundle.cjs.js",
   "module": "dist/bundle.esm.js",
   "browser": "dist/bundle.umd.js",
+  "type": "module",
   "author": "",
   "repository": {
     "type": "git",
@@ -20,8 +21,8 @@
     "build": "npm run build:lib && npm run build:demo",
     "build:lib": "rollup -c",
     "start": "npm run build:lib && concurrently -c \"cyan.bold,magenta.bold\" \"npm:build:lib -- -w\"  \"npm:start:demo\" ",
-    "start:demo": "webpack serve --mode=development --config ./demo/webpack.config.js",
-    "build:demo": "webpack --mode=production --config ./demo/webpack.config.js",
+    "start:demo": "webpack serve --mode=development --config ./demo/webpack.config.cjs",
+    "build:demo": "webpack --mode=production --config ./demo/webpack.config.cjs",
     "test": "HERE GOES YOUR TEST TASK",
     "test:prod": "npm run lint",
     "prepare": "husky install"
@@ -45,6 +46,7 @@
     "@babel/cli": "7.23.0",
     "@babel/core": "7.23.0",
     "@babel/eslint-parser": "7.22.15",
+    "@babel/plugin-syntax-import-assertions": "^7.23.3",
     "@babel/plugin-syntax-jsx": "^7.23.3",
     "@babel/plugin-transform-react-jsx": "^7.22.15",
     "@babel/preset-env": "7.22.20",
