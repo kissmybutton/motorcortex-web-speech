@@ -2,7 +2,7 @@ import babel from "@rollup/plugin-babel";
 import commonjs from "@rollup/plugin-commonjs";
 import json from "@rollup/plugin-json";
 import resolve from "@rollup/plugin-node-resolve";
-import { terser } from "rollup-plugin-terser";
+import terser from '@rollup/plugin-terser';
 import pkg from "./package.json";
 
 export default [
@@ -13,7 +13,23 @@ export default [
       { file: pkg.main, format: "cjs" },
       { file: pkg.module, format: "es" },
     ],
-    plugins: [resolve(), commonjs(), babel(), json()],
+    plugins: [
+      resolve(),
+      babel({
+        plugins: [
+          "@babel/plugin-syntax-jsx",
+          [
+            "@babel/plugin-transform-react-jsx",
+            {
+              pragma: "JSX",
+            },
+          ],
+        ],
+        extensions: [".js", ".jsx"],
+      }),
+      commonjs(),
+      json(),
+    ],
   },
   {
     input: "src/index.js",
@@ -31,8 +47,19 @@ export default [
     plugins: [
       json(),
       resolve({ mainFields: ["module", "main", "browser"] }),
+      babel({
+        plugins: [
+          "@babel/plugin-syntax-jsx",
+          [
+            "@babel/plugin-transform-react-jsx",
+            {
+              pragma: "JSX",
+            },
+          ],
+        ],
+        extensions: [".js", ".jsx"],
+      }),
       commonjs(),
-      babel(),
       terser(),
     ],
   },
