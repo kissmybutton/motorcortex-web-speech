@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4.1.7
       - name: eslint
-        uses: reviewdog/action-eslint@v1.25.0
+        uses: reviewdog/action-eslint@v1.26.0
         with:
           github_token: ${{ secrets.github_token }}
           reporter: github-pr-review
