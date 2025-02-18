@@ -1,69 +1,41 @@
 import { HTMLClip, loadPlugin } from "@donkeyclip/motorcortex";
 import Player from "@donkeyclip/motorcortex-player";
-import MyPluginDefinition from "../dist/bundle.esm.js";
-const MyPlugin = loadPlugin(MyPluginDefinition);
+import PluginDefinition from "../src/index.js";
+const WebSpeechPlugin = loadPlugin(PluginDefinition);
 
-const clip = new HTMLClip({
-  html: `<div class="container">
-        <div id="effect"></div>
-        <div id="htmlclip"></div>
-        <div id="combo"></div>
-        <div id="myclip"></div>
-    </div>`,
-  css: `
-        .container{
-            width: 600px,
-            height: 400px
-        }
-        .container>div{
-            width: 50%;
-            height: 50%;
-        }
-    `,
+const MyClip = new HTMLClip({
   host: document.getElementById("clip"),
+  id: "my-root-clip",
+  html: `<div id="video-container"></div>`,
+  css: `
+    #video-container{
+        width: 1280px;
+        height: 720px;
+    }
+  `,
   containerParams: {
-    width: "600px",
-    height: "400px",
+    width: "1280px",
+    height: "720px",
   },
 });
 
-const newEffect = new MyPlugin.MyEffect(
+const WSC = new WebSpeechPlugin.Clip(
   {
-    animatedAttrs: {
-      attr: "finalvalue",
-    },
-  },
-  {
-    selector: "#effect",
-    duration: 1000,
-  },
+    selector: "#video-container",
+    id: "WSClip",
+  }
 );
 
-const newCombo = new MyPlugin.MyCombo(
+const Playback = new WebSpeechPlugin.Speak(
   {
-    // here goes your attrs
+    text: "Hey there, I am a WebSpeech Clip. How do you like it?",
   },
   {
-    selector: "#combo",
-  },
-);
-
-const newHTMLClip = new MyPlugin.MyHTMLClip(
-  {
-    // here goes your attrs
-  },
-  {
-    selector: "#htmlclip",
-  },
-);
-
-const newCustomClip = new MyPlugin.Clip({
-  selector: "#myclip",
+  selector: "!#webspeech",
+  duration: 10000,
 });
 
-clip.addIncident(newEffect, 0);
-clip.addIncident(newCombo, 0);
-clip.addIncident(newHTMLClip, 0);
-clip.addIncident(newCustomClip, 0);
+MyClip.addIncident(WSC, 0);
+WSC.addIncident(Playback, 0);
 
-new Player({ clip });
+new Player({ clip: MyClip});
