@@ -38,4 +38,5 @@ const Playback = new WebSpeechPlugin.Speak(
 MyClip.addIncident(WSC, 0);
 WSC.addIncident(Playback, 0);
 
-new Player({ clip: MyClip});
+new Player({ clip: MyClip, showVolume: true });
+window.myclip = MyClip;

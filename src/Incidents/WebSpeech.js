@@ -2,7 +2,7 @@ import { MediaPlayback } from "@donkeyclip/motorcortex";
 let voices = speechSynthesis.getVoices();
 speechSynthesis.onvoiceschanged = () => loadVoices();
 function loadVoices() {
-    console.log("Loading voices");
+    console.log("Loaded voices");
     voices = speechSynthesis.getVoices();
 }
 
@@ -24,6 +24,7 @@ export default class Speak extends MediaPlayback {
 
     play() {
         this.utterance.voice = voices[this.element.entity.voice];
+        console.log(this.element.entity.volume);
         this.utterance.volume = this.element.entity.volume;
         speechSynthesis.speak(this.utterance);
     }

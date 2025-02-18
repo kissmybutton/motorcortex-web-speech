@@ -8,8 +8,8 @@ export default class WebSpeechClip extends BrowserClip {
     }
 
     setVolume(vol) {
-        console.log("Setting volume", vol);
-        this.vol = vol;
+        console.log(vol);
+        this.entity.volume = vol;
         for (let key in this.activeUtterances) {
             if (this.activeUtterances.hasOwnProperty(key)) {
                 this.activeUtterances[key].volume = vol;
@@ -22,6 +22,15 @@ export default class WebSpeechClip extends BrowserClip {
         this.activeUtterances = {};
         const voice = "160";
         const that = this;
+
+        setTimeout(() => {
+            const res = this.DescriptiveIncident.volumeChangeSubscribe(
+                that.id,
+                that.setVolume.bind(that)
+            );
+            that.setVolume(res);
+        });
+        
         const customEntity = {
             voice,
             volume: that.vol,
