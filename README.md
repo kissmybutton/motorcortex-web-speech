@@ -1,44 +1,63 @@
-# motorcortex-plugin-starter
+# motorcortex-webspeech
 
 ## Purpose
 
-A starter plugin for creating MotorCortex plugins.
+An experimental plugin that utilises web speech api. Even though the plugin is bug free and ready to 
+use is strictly developed to operate on Chrome web browser for the time being, something that is
+subject to change in the future, as more browsers support the underlying api.
 
-## Structure and Contents
+Even when used on Chrome, the plugin needs to utilize specific voices that are available on user's
+machine. This is not standard and it may differ from os to os, from browser version to browser version
+and from pc to pc. That's why the plugin is considered experimental, as it has to be configured so
+it complies with the available voices of the specific user pc.
 
-It includes:
+## Installation
 
-- rollup configuration & ready to use build tools
-- a pre-configured webpack for the needs of the demo
-- pre-configured eslint and babel
-- and a set of ready to work on, Incidents:
-  - **Effect**, for developing a custom Effect
-  - **HTMLClip**, for developing a pre-configured HTML Clip with HTML, CSS and Incidents
-  - **Combo**, for developing custom, pre-configured Combos
-  - **Clip**, for developing custom browser Clips, such as canvas
+```bash
+$ npm install --save @kissmybutton/motorcortex-webspeech
+# OR
+$ yarn add @kissmybutton/motorcortex-webspeech
+```
 
-These Incidents are the starting point for developing a plugin. They extend the right
-Classes from MotorCortex SDK and they have blank implementations of all the methods that
-should or can be overwritten, with comments.
+## Usage
+```javascript
+import { loadPlugin } from "@kissmybutton/motorcortex";
+import PluginDefinition from "@kissmybutton/motorcortex-webspeech";
+const WebSpeech = loadPlugin(PluginDefinition);
 
-Along with the comments you can always refer to <a href="https://docs.motorcortexjs.com/" target="_blank">MotorCortex documentation</a>
-for detailed information on how to implement a plugin.
 
-## How to use
+const MyClip = new HTMLClip({...}); // create an HTML Clip
 
-Once you've decided what exactly your pluign is going to do and once we've decided on the type of Incident(s)
-you need to implement, you can start directly from the basic/blank implementations and either work on them directly
-or just copy them.
-Change the names of the files, name your Classes however you want but always make sure you import and
-expose everything properly on your index.js file.
+// create a WebSpeech.Clip and attach it to a unique element of your parent clip's html 
+const WSC = new WebSpeech.Clip(
+  {
+    selector: "#video-container"
+  }
+);
 
-Also, it's imortant to change your package.json file so you can name your pluign, provide details and more.
+// create a Speak instance by providing the text to speak. Always use the !#webspeech selector and provide the duration
+const Playback = new WebSpeechPlugin.Speak(
+  {
+    text: "Hello. I am a test for web speech support for the library Motor Cortex.",
+  },
+  {
+  selector: "!#webspeech",
+  duration: 10000,
+});
 
-## Commands
+// add the WebSpeech instance clip to your parent clip
+MyClip.addIncident(WSC, 0);
+// and the Speak instance to your WebSpeech clip
+WSC.addIncident(Playback, 0);
 
-- `npm run build`: builds the dist of your pluign along with the demo
-- `npm run build:demo`: builds just the demo
-- `npm start`: builds everything and starts the demo
-- `npm start:demo`: just starts the demo
+// and you are ready to go. Have fun!
+new Player({ clip: MyClip, showVolume: true });
+```
 
-## Have fun!!!
+## Capabilities & Restrictions
+As web speech api doesn't support `seek` or `start from` when seeked the speak instance stops.
+Also, as no changes can be made on the volume of an utterance once it starts, changes in volume
+will affect only the utterances to play and not the currently playing ones, which will ignore the
+volume change.
+
+Pause and resume will play as normally.
