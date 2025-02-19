@@ -8,7 +8,8 @@ export default class WebSpeechClip extends BrowserClip {
     }
 
     setVolume(vol) {
-        console.log(vol);
+        // utterances that are currently running can't adjust their volume dynamically
+        // still we leave this code here as a reference for future implementations
         this.entity.volume = vol;
         for (let key in this.activeUtterances) {
             if (this.activeUtterances.hasOwnProperty(key)) {

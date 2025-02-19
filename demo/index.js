@@ -28,7 +28,7 @@ const WSC = new WebSpeechPlugin.Clip(
 
 const Playback = new WebSpeechPlugin.Speak(
   {
-    text: "Hey there, I am a WebSpeech Clip. How do you like it?",
+    text: "Hello. I am a test for web speech support for the library Motor Cortex and also for the AI technology of Vaia. I hope you enjoy it.",
   },
   {
   selector: "!#webspeech",
