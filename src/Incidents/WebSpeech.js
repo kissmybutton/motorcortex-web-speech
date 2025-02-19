@@ -7,7 +7,6 @@ const conf = {
 let voices = speechSynthesis.getVoices();
 speechSynthesis.onvoiceschanged = () => loadVoices();
 function loadVoices() {
-    console.log("Loaded voices");
     voices = speechSynthesis.getVoices();
 }
 
@@ -16,11 +15,9 @@ export default class Speak extends MediaPlayback {
         const utterance = new SpeechSynthesisUtterance(attrs.text);
         const that = this;
         utterance.onstart = () => {
-            console.log("Speech started");
             that.element.entity.addUtterance(that.id, that.utterance);
         }
         utterance.onend = () => {
-            console.log("Speech ended");
             that.element.entity.removeUtterance(that.id);
         }
 

@@ -1,5 +1,29 @@
 import { BrowserClip } from "@donkeyclip/motorcortex";
 
+const availableVoices = {
+    "chrome": [
+        {
+            "name": "Google US English (en-US)",
+            "gender": "female",
+            "words_per_second": 3.5
+        },
+        {
+            "name": "Google UK English Female (en-GB)",
+            "gender": "female",
+            "words_per_second": 3.5
+        },
+        {
+            "name": "Google UK English Male (en-GB)",
+            "genger": "male",
+            "words_per_second": 3.5
+        }       
+    ]
+}
+
+const getVoice = (name) => {
+    return availableVoices.chrome.find(voice => voice.name === name);
+}
+
 export default class WebSpeechClip extends BrowserClip {
     get html() {
         return `
