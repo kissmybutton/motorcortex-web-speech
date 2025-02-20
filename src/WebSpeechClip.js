@@ -45,7 +45,7 @@ export default class WebSpeechClip extends BrowserClip {
     onAfterRender() {
         this.vol = 1;
         this.activeUtterances = {};
-        const voice = "160";
+        const voice = this.attrs.voice || "1";
         const that = this;
 
         setTimeout(() => {

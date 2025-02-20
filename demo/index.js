@@ -21,6 +21,9 @@ const MyClip = new HTMLClip({
 
 const WSC = new WebSpeechPlugin.Clip(
   {
+    voice: 159
+  },
+  {
     selector: "#video-container",
     id: "WSClip",
   }

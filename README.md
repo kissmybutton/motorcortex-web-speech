@@ -31,12 +31,15 @@ const MyClip = new HTMLClip({...}); // create an HTML Clip
 // create a WebSpeech.Clip and attach it to a unique element of your parent clip's html 
 const WSC = new WebSpeech.Clip(
   {
+    voice: 159 // optional attrs
+  },
+  {
     selector: "#video-container"
   }
 );
 
 // create a Speak instance by providing the text to speak. Always use the !#webspeech selector and provide the duration
-const Playback = new WebSpeechPlugin.Speak(
+const Playback = new WebSpeech.Speak(
   {
     text: "Hello. I am a test for web speech support for the library Motor Cortex.",
   },
