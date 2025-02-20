@@ -1,5 +1,5 @@
 {
-  "name": "motorcortex-webspeech",
+  "name": "@kissmybutton/motorcortex-webspeech",
   "version": "0.0.1",
   "description": "Web Speech plugin for MC",
   "main": "dist/motorcortex-webspeech.cjs.js",
