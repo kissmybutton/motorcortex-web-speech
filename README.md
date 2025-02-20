@@ -64,3 +64,68 @@ will affect only the utterances to play and not the currently playing ones, whic
 volume change.
 
 Pause and resume will play as normally.
+
+## Exporting subtitles
+One of the helper features that the plugin supports is to automatically export the subtitles of the clip.
+
+To do so you need to do the following:
+1. Add your WebSpeech Clip to a window variable
+```js
+const WSC = new WebSpeechPlugin.Clip(
+  {
+    voice: 159
+  },
+  {
+    selector: "#video-container",
+    id: "WSClip",
+  }
+);
+
+window.speechClip = WSC;
+```
+
+2. Open your chrome dev console and type:
+```js
+speechClip.realClip.exportSubs();
+```
+
+3. A file will be prompted for download, containing the subs
+
+### Configuring subs export
+The subtitles export assume:
+- 0.4 seconds per word and this affects the duration of each subtitle and the splitting of long text into multiple subs.
+If you realise that subs are fast you can change this value to greater values (e.g. 0.43 or 0.45 etc). If you realise that
+the subs are slow then you need to lower the value to 0.39, 0.37 etc. 
+
+To change this parameter pass the `secondsPerWord` attribute of your Web Speech Clip. E.g.:
+```js
+const WSC = new WebSpeechPlugin.Clip(
+  {
+    voice: 159,
+    secondsPerWord: 0.35
+  },
+  {
+    selector: "#video-container",
+    id: "WSClip",
+  }
+);
+
+window.speechClip = WSC;
+```
+
+- The plugin also assumes 80 characters max per line. You can change this value by the use of `maxCharactersPerLine`
+of the Web Speech Clip. E.g.:
+```js
+const WSC = new WebSpeechPlugin.Clip(
+  {
+    voice: 159,
+    maxCharactersPerLine: 77
+  },
+  {
+    selector: "#video-container",
+    id: "WSClip",
+  }
+);
+
+window.speechClip = WSC;
+```

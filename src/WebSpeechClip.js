@@ -1,4 +1,5 @@
 import { BrowserClip } from "@donkeyclip/motorcortex";
+import { splitTextIntoChunks, countWords, formatMilliseconds } from "./subsMethods.js";
 
 const availableVoices = {
     "chrome": [
@@ -68,5 +69,54 @@ export default class WebSpeechClip extends BrowserClip {
         };
         this.entity = customEntity;
         this.setCustomEntity("webspeech", customEntity);
+    }
+
+    exportSubs(){
+        const subsMaxChars = this.attrs.maxCharactersPerLine || 80;
+        const secsPerWord = this.attrs.secondsPerWord || 0.4;
+        const subs = [];
+        const def = this.DescriptiveIncident.exportDefinition();
+        const incidents = def.incidents;
+        for(let key in incidents){
+            if(incidents.hasOwnProperty(key)){
+                const incident = incidents[key];
+                // console.log(incident);
+                const text = incident.leaf.attrs.text;
+                
+                const chunks = splitTextIntoChunks(text, subsMaxChars)
+                
+                let startDelta = 0;
+                for(let i=0; i<chunks.length; i++){
+                    const chunk = chunks[i];
+                    const duration = countWords(chunk.text) * secsPerWord * 1000;
+                    subs.push({
+                        start: incident.position + startDelta, 
+                        duration: duration,
+                        text: chunk.text
+                    });
+                    startDelta += duration + 10;
+                }
+            }
+        }
+
+        let subsText = ``;
+        for(let i=0; i<subs.length; i++){
+            const sub = subs[i];
+            subsText += `${i+1}
+${formatMilliseconds(sub.start)} --> ${formatMilliseconds(sub.start + sub.duration)}
+${sub.text}
+
+`;
+        }
+        const blob = new Blob([subsText], { type: "text/plain" });
+        const url = URL.createObjectURL(blob);
+
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "subs.txt";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
     }
 }

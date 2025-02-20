@@ -38,8 +38,18 @@ const Playback = new WebSpeechPlugin.Speak(
   duration: 10000,
 });
 
+const Playback2 = new WebSpeechPlugin.Speak(
+  {
+    text: `It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.`,
+  },
+  {
+  selector: "!#webspeech",
+  duration: 20000,
+});
+
 MyClip.addIncident(WSC, 0);
 WSC.addIncident(Playback, 0);
+WSC.addIncident(Playback2, 14000);
 
 new Player({ clip: MyClip, showVolume: true });
-window.myclip = MyClip;
+window.speechClip = WSC;
