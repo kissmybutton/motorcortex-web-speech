@@ -1,7 +1,7 @@
 {
   "name": "@kissmybutton/motorcortex-webspeech",
-  "version": "0.1.0",
-  "description": "Web Speech plugin for MC",
+  "version": "0.2.0",
+  "description": "Web Speech (TTS) plugin for MotorCortex — browser-native text-to-speech on the MC timeline",
   "main": "dist/motorcortex-webspeech.cjs.js",
   "module": "dist/motorcortex-webspeech.esm.js",
   "browser": "dist/motorcortex-webspeech.umd.js",
@@ -9,7 +9,7 @@
   "author": "",
   "repository": {
     "type": "git",
-    "url": "Your git repo here"
+    "url": "https://github.com/kissmybutton/motorcortex-web-speech.git"
   },
   "license": "MIT",
   "engines": {
@@ -40,7 +40,7 @@
     ]
   },
   "peerDependencies": {
-    "@donkeyclip/motorcortex": "^9.13.1"
+    "@donkeyclip/motorcortex": ">=9.24.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.23.4",
@@ -51,7 +51,7 @@
     "@babel/plugin-transform-react-jsx": "^7.22.15",
     "@babel/preset-env": "^7.23.3",
     "@babel/preset-react": "^7.23.3",
-    "@donkeyclip/motorcortex": "^9.13.1",
+    "@donkeyclip/motorcortex": "^9.24.0",
     "@donkeyclip/motorcortex-player": "2.10.11",
     "@rollup/plugin-babel": "6.0.4",
     "@rollup/plugin-commonjs": "25.0.8",
